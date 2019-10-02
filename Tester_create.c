@@ -8,7 +8,8 @@
 #include <sys/types.h> 
 #include <unistd.h> 
 #include "login.h"
-
+#include "getId.h"	
+#include <time.h>
 #define IP_PROTOCOL 0 
 #define IP_ADDRESS "127.0.0.1" // localhost 
 #define PORT_NO 15050 
@@ -59,8 +60,8 @@ int main()
 	FILE* fp; 
 
 	//user login	
-	char res=login();
-	if(res=='s'){ 	
+	char testerId =login();
+	if(strlen(testerId)>1){ 	
 
 	// socket() 
 	sockfd = socket(AF_INET, SOCK_DGRAM, 
@@ -69,9 +70,30 @@ int main()
 	if (sockfd < 0) 
 		printf("\nConnection denied\n"); 
 
-	
-		printf("\nPlease enter bug details:\n"); 
-		scanf("%s", net_buf); 
+	char time[64],status[40],bugId,devId[60],bugDetail[300]; //For saving bug details
+ 	printf("\nPlease enter bug details:\n");
+        bugId=getId(); //for generate unique bug id
+        status="New";
+	devId="null";
+        time_t t = time(NULL);
+        struct tm *tm = localtime(&t);
+        assert(strftime(time,sizeof(time),"%c",tm);
+      
+	printf("\nPlease enter bug name:\n");
+	scanf("%s",bugDetail); 
+	       strcat(net_buf,bugId);
+	       strcat(net_buf,"|");
+	       strcat(net_buf,bugDetail);
+	       strcat(net_buf,"|");
+	       strcat(net_buf,time);
+	       strcat(net_buf,"|");
+	       strcat(net_buf,testerId);
+	       strcat(net_buf,"|");
+	       strcat(net_buf,status);
+	       strcat(net_buf,"|");
+	       strcat(net_buf,devId);
+	       strcat(net_buf,"|");
+	       
 		sendto(sockfd, net_buf, NET_BUF_SIZE, 
 			sendrecvflag, (struct sockaddr*)&addr_con, 
 			addrlen); 
