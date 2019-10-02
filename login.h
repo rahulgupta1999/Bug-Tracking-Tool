@@ -66,7 +66,7 @@ char filename[] = "idpass.txt";
 	if(strcmp(login,line)==0)
 	{	
 		fclose(file);		
-		return 's';}
+		return id;}
 	else
 		{	
 		fclose(file);		
