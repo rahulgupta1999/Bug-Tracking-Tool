@@ -1,20 +1,17 @@
 #include<stdio.h>
 #include<sys/time.h>
 
-int main()
+char getId()
 {
-        int i;
-        for(i =0;i < 32; i++)
-                func(i);
-        return 0;
-}
-int func(unsigned long u_id)
-{
+        int i=rand();
+
         struct timeval t;
-        unsigned long id;
+        int id;
         gettimeofday(&t,NULL);
         id = (t.tv_sec * 1000 * 1000) + (t.tv_usec * 1000) << 42;
-        id |= (u_id % 16777216) << 24;
-        printf("%lu\n ",id);
-        return 0;
+        id |= (i % 16777216) << 24;
+       char id2[20], id3[20]="Bg";
+	   itoa(id,id2,10);
+	   strcat(id3,id2);
+	   return id3;
 }
