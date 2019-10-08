@@ -81,13 +81,13 @@ int main()
       
 	printf("\nPlease enter bug name:\n");
 	scanf("%s",bugDetail); 
+	       strcat(net_buf,testerId);
+	       strcat(net_buf,"|");
 	       strcat(net_buf,bugId);
 	       strcat(net_buf,"|");
 	       strcat(net_buf,bugDetail);
 	       strcat(net_buf,"|");
 	       strcat(net_buf,time);
-	       strcat(net_buf,"|");
-	       strcat(net_buf,testerId);
 	       strcat(net_buf,"|");
 	       strcat(net_buf,status);
 	       strcat(net_buf,"|");
