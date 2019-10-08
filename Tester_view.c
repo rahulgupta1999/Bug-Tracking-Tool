@@ -60,7 +60,7 @@ int main()
 
 	//user login	
 	char res=login();
-	if(res=='s'){ 
+	if(strlen(res)>1){ 
 
 	// socket() 
 	sockfd = socket(AF_INET, SOCK_DGRAM, 
