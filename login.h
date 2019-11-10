@@ -28,15 +28,15 @@ char getch_(int echo) {
 char getch(void) {
     return getch_(0);
 }
-char login()
+char *login()
 {
-char id[20],pass[6],pas[7],login[40];
+char *id=malloc(20),pass[6],pas[7],login[40];
 int m=0,l=0;
 
 printf("Enter username: ");
 scanf("%s",id);
 fflush(stdin);
-printf("Enter password of length 6: ");
+printf("Enter password: ");
 
 	while(l<7)
 	{
@@ -57,8 +57,19 @@ strcat(login,"-");
 strcat(login,pass);
 strcat(login,"\n");
 //printf("%s",login);
-char filename[] = "idpass.txt";
-  FILE *file = fopen ( filename, "r" );
+char testerCredentials[] = "tCredentials.txt";
+char developerCredentials[] = "dCredentials.txt";
+char projectManagerCredentials[] = "pmCredentials.txt";
+
+  FILE *file;
+  if(login[0]=='T') 
+  file= fopen ( testerCredentials, "r" );
+
+  else if(login[0]=='D') 
+  file= fopen ( developerCredentials, "r" );
+
+  else if(login[0]=='P') 
+  file= fopen ( projectManagerCredentials, "r" );
 
   if (file != NULL) {
     char line [1000];
@@ -66,16 +77,14 @@ char filename[] = "idpass.txt";
 	if(strcmp(login,line)==0)
 	{	
 		fclose(file);		
-		return 's';}
+		return id;}
 	else
 		{	
 		fclose(file);		
-		return 'f';}
-	
-   
+		return "f";}
 } 
   }
   else {
-    perror(filename);
+    perror("Credentials not forund");
   }
 }
